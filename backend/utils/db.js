@@ -21,4 +21,32 @@ function saveUser(newUser) {
 	return newUser;
 }
 
-module.exports = { getUsers, saveUser };
+function updateUser(id, updates) {
+	const data = getUsers();
+	const userIndex = data.users.findIndex(u => u.id === Number(id));
+
+	if (userIndex === -1) {
+		return null;
+	}
+
+	data.users[userIndex] = { ...data.users[userIndex], ...updates };
+	fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), "UTF-8");
+
+	return data.users[userIndex];
+}
+
+function deleteUser(id) {
+	const data = getUsers();
+	const userIndex = data.users.findIndex(u => u.id === Number(id));
+
+	if (userIndex === -1) {
+		return false;
+	}
+
+	data.users.splice(userIndex, 1);
+	fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), "UTF-8");
+
+	return true;
+}
+
+module.exports = { getUsers, saveUser, updateUser, deleteUser };
