@@ -1,4 +1,5 @@
-npm install tailwindcss @tailwindcss/vite prettier dayjs jest lucide-react motion path react-router recharts react-redux react-router
+npm install tailwindcss @tailwindcss/vite prettier dayjs jest lucide-react motion path react-router recharts react-redux react-router @hookform/resolvers react-hook-form sonner zod
+@reduxjs/toolkit
 
 # React + TypeScript + Vite
 
