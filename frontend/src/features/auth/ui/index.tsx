@@ -1,33 +1,19 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useLoginMutation } from "../api";
-import { loginSchema, TLoginFormData } from "../model/schema";
+import { InputForm } from "@/shared/ui";
+import { User } from "lucide-react";
+import { useLogin } from "../hook/useLogin";
 
 export const AuthForm = () => {
-  const [login, { isLoading }] = useLoginMutation();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<TLoginFormData>({
-    resolver: zodResolver(loginSchema),
-    mode: "onBlur",
-  });
-
-  const onSubmit = async (data: TLoginFormData) => {
-    try {
-      await login(data).unwrap();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { isLoading, register, handleSubmit, errors, onSubmit } = useLogin();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("login")} type="text" placeholder="login" />
-      <input {...register("password")} type="password" placeholder="password" />
-      <button type="submit">Login</button>
+      <InputForm {...register("login")} type="text" placeholder="Login" icon={User} />
+      <InputForm {...register("password")} type="password" placeholder="password" />
+      {errors && <div>{errors.login?.message}</div>}
+      {errors && <div>{errors.password?.message}</div>}
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? "Loading..." : "Login"}
+      </button>
     </form>
   );
 };
