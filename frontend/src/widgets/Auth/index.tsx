@@ -1,3 +1,9 @@
+import { AuthForm } from "@/features/auth/ui";
+
 export const Auth = () => {
-  return <div>Auth</div>;
+  return (
+    <div>
+      <AuthForm />
+    </div>
+  );
 };

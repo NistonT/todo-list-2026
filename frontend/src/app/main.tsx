@@ -1,17 +1,23 @@
 import { createRoot } from "react-dom/client";
+import { Toaster } from "sonner";
 import "./index.css";
-import { MotionProvider } from "./providers/MotionProvider";
-import { RouterProvider } from "./providers/RouterProvider";
-import { StoreProvider } from "./providers/StoreProvider";
+import { ContainerLayout, HeaderLayout } from "./layout";
+import { MotionProvider, RouterProvider, StoreProvider } from "./providers";
 import { Router } from "./router";
 
 createRoot(document.getElementById("root")!).render(
-  // Providers
+  // Provider
   <RouterProvider>
     <StoreProvider>
       <MotionProvider>
-        {/* Router */}
-        <Router />
+        {/* Layout */}
+        <HeaderLayout>
+          <ContainerLayout>
+            {/* Blocks */}
+            <Router />
+            <Toaster position="bottom-right" richColors />
+          </ContainerLayout>
+        </HeaderLayout>
       </MotionProvider>
     </StoreProvider>
   </RouterProvider>,
