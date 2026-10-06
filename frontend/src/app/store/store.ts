@@ -1,9 +1,11 @@
+import userReducer from "@/entities/user/store/slice";
 import { baseApi } from "@/shared/api/base";
 import { configureStore } from "@reduxjs/toolkit/react";
 
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware),
 });
