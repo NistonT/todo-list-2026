@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import { Toaster } from "sonner";
 import "./index.css";
-import { ContainerLayout, HeaderLayout } from "./layout";
+import { CheckAuthLayout, ContainerLayout, HeaderLayout } from "./layout";
 import { MotionProvider, RouterProvider, StoreProvider } from "./providers";
 import { Router } from "./router";
 
@@ -13,9 +13,11 @@ createRoot(document.getElementById("root")!).render(
         {/* Layout */}
         <HeaderLayout>
           <ContainerLayout>
-            {/* Blocks */}
-            <Router />
-            <Toaster position="bottom-right" richColors />
+            <CheckAuthLayout>
+              {/* Blocks */}
+              <Router />
+              <Toaster position="bottom-right" richColors />
+            </CheckAuthLayout>
           </ContainerLayout>
         </HeaderLayout>
       </MotionProvider>

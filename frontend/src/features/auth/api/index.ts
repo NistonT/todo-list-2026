@@ -1,10 +1,9 @@
 import { baseApi } from "@/shared/api/base";
-import type { IUser } from "@/shared/model/types/user";
-import type { TLoginFormData } from "../model/schema";
+import type { TAuthResponse, TLoginFormData } from "../model";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    login: build.mutation<IUser & { token: string }, TLoginFormData>({
+    login: build.mutation<TAuthResponse, TLoginFormData>({
       query: (data) => ({
         url: "/auth/login",
         method: "POST",
@@ -14,7 +13,7 @@ export const authApi = baseApi.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          localStorage.setItem("token", data.token);
+          localStorage.setItem("token", data.access_token);
         } catch (error) {
           console.error("Login failed", error);
         }
