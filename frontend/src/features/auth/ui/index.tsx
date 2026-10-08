@@ -11,6 +11,7 @@ export const AuthForm = () => {
       <InputForm {...register("password")} type="password" placeholder="password" icon={KeyRound} />
       {errors && <div>{errors.login?.message}</div>}
       {errors && <div>{errors.password?.message}</div>}
+      <input type="checkbox" {...register("remember")} />
       <button type="submit" disabled={isLoading}>
         {isLoading ? "Loading..." : "Login"}
       </button>
