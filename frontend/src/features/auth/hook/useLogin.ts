@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { useLoginMutation } from "../api";
 import { loginSchema, type TLoginFormData } from "../model/schema";
+import { savedAuthForm } from "../utils/savedAuthForm";
 
 export const useLogin = () => {
   const [login, { isLoading }] = useLoginMutation();
@@ -21,13 +22,30 @@ export const useLogin = () => {
   } = useForm<TLoginFormData>({
     resolver: zodResolver(loginSchema),
     mode: "onBlur",
+    defaultValues: savedAuthForm(),
   });
 
   const onSubmit = async (data: TLoginFormData) => {
     try {
-      const user = await login(data).unwrap();
+      const { remember, ...authData } = data;
+
+      const user = await login(authData).unwrap();
       await dispatch(addUser(user.user_data));
       toast.success("Successfully authorized!");
+
+      if (remember) {
+        localStorage.setItem(
+          "auth",
+          JSON.stringify({
+            login: authData.login,
+            password: authData.password,
+            remember,
+          }),
+        );
+      } else {
+        localStorage.removeItem("auth");
+      }
+
       navigate(pageRouter.HOME);
     } catch (error) {
       console.log(error);
