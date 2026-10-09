@@ -9,9 +9,13 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export const ButtonIcon = forwardRef<HTMLButtonElement, Props>(({ icon: Icon, className, classNameButton, children, ...props }, ref) => {
   return (
-    <div className={`flex gap-2 ${className}`}>
+    <div
+      className={`flex gap-2 px-5 py-2.5 rounded-lg font-medium
+          disabled:opacity-50 disabled:cursor-not-allowed
+          transition-colors items-center ${className}`}
+    >
       {Icon && <Icon />}
-      <button ref={ref} className={`${classNameButton}`} {...props}>
+      <button ref={ref} className={` ${classNameButton}`} {...props}>
         {children}
       </button>
     </div>
