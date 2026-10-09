@@ -1,6 +1,7 @@
 import type { RootState } from "@/app/store/store";
 import { useLogout } from "@/features/logout/useLogout";
 import { ButtonIcon, LogoHeader } from "@/shared/ui";
+import { LogOut } from "lucide-react";
 import { useSelector } from "react-redux";
 
 export const Header = () => {
@@ -13,7 +14,11 @@ export const Header = () => {
       <div className="flex justify-between w-full">
         <LogoHeader />
 
-        {isAuth && <ButtonIcon onClick={handleLogout}>Logout</ButtonIcon>}
+        {isAuth && (
+          <ButtonIcon onClick={handleLogout} icon={LogOut}>
+            Logout
+          </ButtonIcon>
+        )}
       </div>
     </header>
   );
