@@ -5,6 +5,12 @@
       "password": "Password123!",
       "role": "admin",
       "id": 2
+    },
+    {
+      "login": "user",
+      "password": "Password123!",
+      "role": "user",
+      "id": 3
     }
   ]
 }

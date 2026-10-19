@@ -1,9 +1,10 @@
 import { baseApi } from "@/shared/api/base";
-import type { TAuthResponse, TLoginFormData } from "../model";
+import type { TAuthResponse } from "@/shared/model/types/base";
+import type { TLoginFormData } from "../model";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    login: build.mutation<TAuthResponse, TLoginFormData>({
+    login: build.mutation<TAuthResponse, Omit<TLoginFormData, "remember">>({
       query: (data) => ({
         url: "/auth/login",
         method: "POST",

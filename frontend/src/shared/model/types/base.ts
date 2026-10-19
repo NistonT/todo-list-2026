@@ -1,3 +1,3 @@
-import type { IUser } from "@/shared/model/types/user";
+import type { IUser } from "./user";
 
 export type TAuthResponse = { user_data: IUser; access_token: string };
