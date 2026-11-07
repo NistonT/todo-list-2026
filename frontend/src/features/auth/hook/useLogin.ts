@@ -1,6 +1,8 @@
 import { addUser } from "@/entities/user/store/slice";
+import { reg } from "@/features/choice-auth/store/slice";
 import { pageRouter } from "@/shared/consts/page-router";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
@@ -11,6 +13,7 @@ import { savedAuthForm } from "../utils/savedAuthForm";
 
 export const useLogin = () => {
   const [login, { isLoading }] = useLoginMutation();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,5 +56,13 @@ export const useLogin = () => {
     }
   };
 
-  return { isLoading, register, handleSubmit, errors, onSubmit };
+  const handleAuth = () => {
+    dispatch(reg());
+  };
+
+  const onTogglePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  return { isLoading, register, handleSubmit, errors, onSubmit, handleAuth, onTogglePassword, showPassword };
 };
