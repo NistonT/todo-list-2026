@@ -11,6 +11,11 @@
       "password": "Password123!",
       "role": "user",
       "id": 3
+    },
+    {
+      "login": "useruseruser",
+      "password": "PasswordUser123!",
+      "id": 4
     }
   ]
 }

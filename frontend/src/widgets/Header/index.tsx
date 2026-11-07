@@ -1,5 +1,5 @@
 import type { RootState } from "@/app/store/store";
-import { useLogout } from "@/features/logout/useLogout";
+import { useLogout } from "@/features/logout/hook/useLogout";
 import { ButtonIcon, LogoHeader } from "@/shared/ui";
 import { LogOut } from "lucide-react";
 import { useSelector } from "react-redux";
